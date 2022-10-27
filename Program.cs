@@ -36,7 +36,9 @@ string[] CreatingInputArray(int size)// аргумент - размер масс
     return inpArr;
 }
 
-string answer = "cтрок, длина которых меньше либо \nравна 3 символам, не найдено → ";
+int numbLeters=3;
+
+string answer = $"cтрок, длина которых меньше либо \nравна {numbLeters} символам, не найдено → ";
 
 string[] oldArray = CreatingInputArray(5);
 
@@ -46,7 +48,7 @@ string[] CreatOutputArray(string[] inpArr, int numS)//выбираем знач�
     int i = 0, j = 0;
     while (i < inpArr.Length)
     {
-        if (inpArr[i].Length < numS)
+        if (inpArr[i].Length < numS+1)
         {
             nArr[j] = inpArr[i];
             j++;
@@ -56,12 +58,12 @@ string[] CreatOutputArray(string[] inpArr, int numS)//выбираем знач�
     }
 
     if (nArr.Length > 1) Array.Resize(ref nArr, nArr.Length - 1);
-    if (nArr[0] != null) answer = $"cтрок, длина которых меньше либо \nравна 3 символам, найдено {nArr.Length} → ";
+    if (nArr[0] != null) answer = $"cтрок, длина которых меньше либо \nравна {numbLeters} символам, найдено {nArr.Length} → ";
     return nArr;
 }
 
 
-string[] newArray = CreatOutputArray(oldArray,4);
+string[] newArray = CreatOutputArray(oldArray,numbLeters);
 
 Console.Clear();
 Console.Write($"В исходном массиве → [{String.Join(",",oldArray)}]\n");
