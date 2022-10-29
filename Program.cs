@@ -9,6 +9,10 @@
 ["1234", "1567", "-2", "computer science"] → [“-2”]
 ["Russia", "Denmark", "Kazan"] → [] 
 */
+int numbLeters = 3;
+string answer = $"cтрок, длина которых меньше либо \nравна {numbLeters} символам, не найдено → ";
+string[] oldArray = new string[5];
+string[] newArray = new string[1];
 
 string AutoGenerationText(int maxChar)
 {
@@ -26,47 +30,39 @@ string AutoGenerationText(int maxChar)
     return result;
 }
 
-string[] CreatingInputArray(int size)// аргумент - размер массива
+void CreatingInputArray(string[] inpArr)// 
 {
-    string[] inpArr = new string[size];
+    int size = inpArr.Length;
     for (int i = 0; i < size; i++)
     {
         inpArr[i] = AutoGenerationText(8);
     }
-    return inpArr;
 }
 
-int numbLeters=3;
-
-string answer = $"cтрок, длина которых меньше либо \nравна {numbLeters} символам, не найдено → ";
-
-string[] oldArray = CreatingInputArray(5);
-
-string[] CreatOutputArray(string[] inpArr, int numS)//выбираем значения короче numS симв.
+void CreatOutputArray(string[] inpArr, int numS)//выбираем значения короче numS симв.
 {
-    string[] nArr = new string[1];
     int i = 0, j = 0;
     while (i < inpArr.Length)
     {
-        if (inpArr[i].Length < numS+1)
+        if (inpArr[i].Length < numS + 1)
         {
-            nArr[j] = inpArr[i];
+            newArray[j] = inpArr[i];
             j++;
-            Array.Resize(ref nArr, nArr.Length + 1);
+            Array.Resize(ref newArray, newArray.Length + 1);
         }
         i++;
     }
 
-    if (nArr.Length > 1) Array.Resize(ref nArr, nArr.Length - 1);
-    if (nArr[0] != null) answer = $"cтрок, длина которых меньше либо \nравна {numbLeters} символам, найдено {nArr.Length} → ";
-    return nArr;
+    if (newArray.Length > 1) Array.Resize(ref newArray, newArray.Length - 1);
+    if (newArray[0] != null) answer = $"cтрок, длина которых меньше либо \nравна {numbLeters} символам, найдено {newArray.Length} → ";
 }
 
+CreatingInputArray(oldArray);
 
-string[] newArray = CreatOutputArray(oldArray,numbLeters);
+CreatOutputArray(oldArray, numbLeters);
 
 Console.Clear();
-Console.Write($"В исходном массиве → [{String.Join(",",oldArray)}]\n");
+Console.Write($"В исходном массиве → [{String.Join(",", oldArray)}]\n");
 Console.Write($"{answer} ");
 Console.Write("[");
 Console.Write(String.Join(",", newArray));
